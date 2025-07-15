@@ -14,7 +14,7 @@ function AiTools() {
 
       <div className="flex flex-wrap mt-10 justify-center">
         {AiToolsData.map((tool, index) =>(
-          <div key={index} className='p-8 m-4 max-w-xs rounded-lg bg-[#FDFDFE] shadow-lg border border-gray-100 hover:translate-y-1 transition-all duration-300 cursor-pointer' onClick={() => user && navigate(tool.path)}>
+          <div key={index} className='p-8 m-4 max-w-xs rounded-lg bg-[#FDFDFE] shadow-lg border border-gray-100 hover:-translate-y-1 transition-all duration-300 cursor-pointer' onClick={() => user && navigate(tool.path)}>
             <tool.Icon
               className="w-12 h-12 p-3 text-white rounded-xl bg-gradient-to-b"
               style={{
