@@ -9,8 +9,6 @@
   --color-primary: #553AEB;
 }
 
-/* @layer utilities{
-  .color-primary {
-    color: var(--color-primary);
-  }
-} */
+.cl-drawerRoot {
+    z-index: 999 !important;
+}
