@@ -1,27 +1,30 @@
 const Testimonial = () => {
-    const dummyTestimonialData = [
-        {
-            image: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=200",
-            name: 'John Doe',
-            title: 'Marketing Director, TechCorp',
-            content: 'ContentAI has revolutionized our content workflow. The quality of the articles is outstanding, and it saves us hours of work every week.',
-            rating: 4,
-        },
-        {
-            image: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=200",
-            name: 'Jane Smith',
-            title: 'Content Creator, TechCorp',
-            content: 'ContentAI has made our content creation process effortless. The AI tools have helped us produce high-quality content faster than ever before.',
-            rating: 5,
-        },
-        {
-            image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=200&h=200&auto=format&fit=crop",
-            name: 'David Lee',
-            title: 'Content Writer, TechCorp',
-            content: 'ContentAI has transformed our content creation process. The AI tools have helped us produce high-quality content faster than ever before.',
-            rating: 4,
-        },
-    ]
+
+  const testimonialData = [
+    {
+        image: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=200",
+        name: 'John Doe',
+        title: 'Marketing Director',
+        content: 'Artifinity.ai has completely transformed the way we handle visuals and writing. From removing backgrounds to generating compelling blog posts, it’s like having a full creative team in one tool.',
+        rating: 4,
+    },
+    {
+        image: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=200",
+        name: 'Jane Smith',
+        title: 'Content Creator',
+        content: 'Thanks to Artifinity.ai, our design and content process is now 3x faster. The AI-generated images are spot-on, and the article suggestions are incredibly relevant and polished.',
+        rating: 5,
+    },
+    {
+        image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=200&h=200&auto=format&fit=crop",
+        name: 'David Lee',
+        title: 'Content Writer',
+        content: 'We started using Artifinity.ai for quick tasks, but now it’s at the center of our content and media production. It’s accurate, intuitive, and a major time-saver for our team.',
+        rating: 4,
+    },
+  ]
+
+
 
     return (
         <div className='px-4 sm:px-20 xl:px-32 py-24'>
@@ -30,7 +33,7 @@ const Testimonial = () => {
                 <p className='text-gray-500 max-w-lg mx-auto'>Don't just take our word for it. Here's what our users are saying.</p>
             </div>
             <div className='flex flex-wrap mt-10 justify-center'>
-                {dummyTestimonialData.map((testimonial, index) => (
+                {testimonialData.map((testimonial, index) => (
                     <div key={index} className='p-8 m-4 max-w-xs rounded-lg bg-[#FDFDFE] shadow-lg border border-gray-100 hover:-translate-y-1 transition duration-300 cursor-pointer'>
                         <div className="flex items-center gap-1">
                             {[...Array(5)].map((_, i) => (
