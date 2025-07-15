@@ -9,7 +9,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
   return (
     <div className={`w-60 bg-white border-r border-gray-200 flex flex-col justify-between items-center max-sm:absolute top-14 bottom-0 ${sidebarOpen ? 'translate-x-0' : 'max-sm:-translate-x-full'} transition-all `}>
       <div className="my-7 w-full">
-        <img src={user.imageUrl} alt="" className="w-13 h-13 rounded-full mx-auto"/>
+        <img onClick={openUserProfile} src={user.imageUrl} alt="user-profile" className="w-13 h-13 rounded-full mx-auto cursor-pointer"/>
         <h1 className="text-center mt-1">{user.fullName}</h1>
         <div className="px-6 mt-5 text-sm text-gray-600 font-medium">
           {SidebarNavItems.map(({to, label, Icon}) => (
