@@ -1,3 +1,4 @@
+import { ReactLenis } from 'lenis/react'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
@@ -15,7 +16,9 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl='/'>
       <BrowserRouter>
-        <App />
+        <ReactLenis root options={{ lerp: 0.1 }}>
+          <App />
+        </ReactLenis>
       </BrowserRouter>
     </ClerkProvider>
   </StrictMode>,
