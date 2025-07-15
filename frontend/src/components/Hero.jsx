@@ -1,10 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { assets } from "../assets";
+import MarqueeTrustedBrands from "./MarqueeTrustedBrands";
 
 function Hero() {
   const navigate = useNavigate();
   return (
-    <div className={`px-4 sm:px-20 xl:px-32 relative flex flex-col w-full justify-center bg-cover bg-no-repeat min-h-screen gap-2`} style={{ backgroundImage: `url(${assets.gradientBackground})` }}>
+    <div className={`px-4 sm:px-20 xl:px-32 relative flex flex-col w-full justify-center items-center bg-cover bg-no-repeat min-h-screen gap-2`} style={{ backgroundImage: `url(${assets.gradientBackground})` }}>
       <div className="text-center">
         <h1 className="text-3xl sm:text-5xl md:text-6xl 2xl:text-7xl font-semibold mx-auto leading-[1.2]">Create amazing content <br />with <span className="text-primary">Artifinity.ai</span></h1>
         <p className="mt-4 max-w-xs sm:max-w-lg 2xl:max-w-xl m-auto max-sm:text-xs text-gray-600">Transform your content creation with our suite of premium AI tools. Write articles, generate images, and more with ease.</p>
@@ -17,6 +18,10 @@ function Hero() {
 
       <div className="flex items-center gap-4 mt-6 mx-auto text-gray-600">
         <img src={assets.user_group} alt="" className="h-8"/>Trusted by 10k+ people
+      </div>
+
+      <div className="absolute bottom-10 w-[85%] mx-auto">
+        <MarqueeTrustedBrands />
       </div>
     </div>
   )
