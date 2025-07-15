@@ -5,10 +5,11 @@ import star_icon from "./star_icon.svg";
 import star_dull_icon from "./star_dull_icon.svg";
 import profile_img_1 from "./profile_img_1.png";
 import arrow_icon from "./arrow_icon.svg";
-import { SquarePen, Hash, Image, Eraser, Scissors, FileText } from 'lucide-react'
+import { SquarePen, Hash, Image, Eraser, Scissors, FileText, Users, House } from 'lucide-react'
 import ai_gen_img_1 from "./ai_gen_img_1.png";
 import ai_gen_img_2 from "./ai_gen_img_2.png";
 import ai_gen_img_3 from "./ai_gen_img_3.png";
+
 
 export const assets = {
     logo,
@@ -19,6 +20,17 @@ export const assets = {
     profile_img_1,
     arrow_icon,
 };
+
+export const SidebarNavItems = [
+  {to: '/ai', label: 'Dashboard', Icon: House},
+  {to: '/ai/write-article', label: 'Write Article', Icon: Hash},
+  {to: '/ai/blog-titles', label: 'Blog Titles', Icon: Image},
+  {to: '/ai/generate-images', label: 'Generate Images', Icon: Image},
+  {to: '/ai/remove-background', label: 'Remove Background', Icon: Eraser},
+  {to: '/ai/remove-object', label: 'Remove Object', Icon: Scissors},
+  {to: '/ai/review-resume', label: 'Review Resume', Icon: FileText},
+  {to: '/ai/community', label: 'Community', Icon: Users},
+]
 
 export const AiToolsData = [
     {
