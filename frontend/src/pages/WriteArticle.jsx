@@ -1,5 +1,6 @@
-import { Edit, Sparkles } from "lucide-react"
-import { useState } from "react"
+import { Edit, Sparkles } from "lucide-react";
+import { useState } from "react";
+import { motion } from "framer-motion";
 
 function WriteArticle() {
   const articleLength = [
@@ -11,37 +12,79 @@ function WriteArticle() {
   const [selectedLength, setSelectedLength] = useState(articleLength[0]);
   const [input, setInput] = useState("");
   return (
-    <div className="h-full overscroll-y p-6 flex items-start flex-wrap gap-4 text-slate-70">
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 40 }}
+      transition={{ type: "spring", stiffness: 80, damping: 18 }}
+      className="h-full overscroll-y p-6 flex items-start flex-wrap gap-4 text-slate-70"
+    >
       {/* left column */}
-      <form onSubmit={(e) => {
+      <motion.form
+        initial={{ opacity: 0, x: -40 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ type: "spring", stiffness: 120, damping: 20, delay: 0.1 }}
+        onSubmit={(e) => {
           e.preventDefault();
           // Handle form submission
-        }} className="w-full max-w-lg p-4 bg-white rounded-lg border border-gray-200">
+        }}
+        className="w-full max-w-lg p-4 bg-white rounded-lg border border-gray-200"
+      >
         <div className="flex items-center gap-3">
           <Sparkles className="w-6 text-[#4A7AFF]"></Sparkles>
           <h1 className="text-xl font-semibold">Article Configuration</h1>
         </div>
-        
+
         <p className="mt-6 text-sm font-medium">Article Topic</p>
 
-        <input onChange={(e) => setInput(e.target.value)} type="text" className="w-full p-2 px-3 mt-2 outline-none text-sm rounded-md border border-gray-300" placeholder="Enter article topic" required />
+        <input
+          onChange={(e) => setInput(e.target.value)}
+          type="text"
+          className="w-full p-2 px-3 mt-2 outline-none text-sm rounded-md border border-gray-300"
+          placeholder="Enter article topic"
+          required
+        />
 
         <p className="mt-4 text-sm font-medium">Article Content</p>
-        
+
         <div className="mt-3 flex gap-3 flex-wrap sm:max-w-9/11">
           {articleLength.map((item, index) => (
-            <span onClick={() => setSelectedLength(item)} key={index} className={`text-xs px-4 py-1 border rounded-full cursor-pointer ${selectedLength.value === item.value ? "bg-blue-50 text-blue-700" : "border-gray-300 text-gray-500"}`}>{item.label}</span>
+            <motion.span
+              whileHover={{ backgroundColor: "#f3f4f6" }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              style={{ borderRadius: "9999px" }}
+              onClick={() => setSelectedLength(item)}
+              key={index}
+              className={`text-xs px-4 py-1 border rounded-full cursor-pointer  ${
+                selectedLength.value === item.value
+                  ? "bg-blue-50 text-blue-700"
+                  : "border-gray-300 text-gray-500"
+              }`}
+            >
+              {item.label}
+            </motion.span>
           ))}
         </div>
         <br />
 
-        <button className="w-full flex justify-center items-center gap-2 bg-gradient-to-r from-[#226BFF] to-[#65ADFF] text-white px-4 py-2 mt-6 text-sm rounded-lg cursor-pointer">
-          <Edit className="w-5"/>
+        <motion.button
+          whileHover={{ scale: 1.01, boxShadow: "0 2px 8px rgba(34,107,255,0.10)" }}
+          whileTap={{ scale: 0.97 }}
+          transition={{ type: "spring", stiffness: 300, damping: 18 }}
+          className="w-full flex justify-center items-center gap-2 bg-gradient-to-r from-[#226BFF] to-[#65ADFF] text-white px-4 py-2 mt-6 text-sm rounded-lg cursor-pointer"
+        >
+          <Edit className="w-5" />
           Generate Article
-        </button>
-      </form>
+        </motion.button>
+      </motion.form>
       {/* right column */}
-      <div className="w-full max-w-lg p-4 bg-white rounded-lg border border-gray-200 flex flex-col min-h-96 max-h-[600px]">
+      <motion.div
+        initial={{ opacity: 0, x: 40 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ type: "spring", stiffness: 120, damping: 20, delay: 0.18 }}
+        className="w-full max-w-lg p-4 bg-white rounded-lg border border-gray-200 flex flex-col min-h-96 max-h-[600px]"
+      >
         <div className="flex items-center gap-3">
           <Edit className="w-6 text-[#4A7AFF]"></Edit>
           <h1 className="text-xl font-semibold">Generated Article</h1>
@@ -53,9 +96,9 @@ function WriteArticle() {
             <p>Enter a topic to generate an article</p>
           </div>
         </div>
-      </div>
-    </div>
-  )
+      </motion.div>
+    </motion.div>
+  );
 }
 
 export default WriteArticle
