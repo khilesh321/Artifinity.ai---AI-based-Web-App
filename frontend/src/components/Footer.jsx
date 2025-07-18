@@ -1,11 +1,18 @@
 import { assets } from "../assets";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export default function Footer() {
     const navigate = useNavigate();
 
     return (
-      <footer className="px-6 md:px-16 lg:px-24 xl:px-32 pt-8 w-full text-gray-500 mt-20">
+      <motion.footer
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 0.5 }}
+        viewport={{ once: true }}
+        className="px-6 md:px-16 lg:px-24 xl:px-32 pt-8 w-full text-gray-500 mt-20"
+      >
         <div className="flex flex-col md:flex-row justify-between w-full gap-10 border-b border-gray-500/30 pb-6">
           <div className="md:max-w-96">
             <div id='logo' className='flex items-center cursor-pointer' onClick={() => navigate('/')}>
@@ -41,6 +48,6 @@ export default function Footer() {
         <p className="pt-4 text-center text-xs md:text-sm pb-5">
           Copyright {new Date().getFullYear()} © Artifinity.ai. All Rights Reserved.
         </p>
-      </footer>
+      </motion.footer>
     );
 };

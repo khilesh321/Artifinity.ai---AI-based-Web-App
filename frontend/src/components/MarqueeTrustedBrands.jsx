@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 const MarqueeTrustedBrands = () => {
     const companyLogos = ["slack", "framer", "netflix", "google", "linkedin", "instagram", "facebook"];
 
@@ -19,7 +21,13 @@ const MarqueeTrustedBrands = () => {
                 }
             `}</style>
 
-            <div className="overflow-hidden w-full relative max-w-5xl mx-auto select-none">
+            <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 1 }}
+                viewport={{ once: true }}
+                className="overflow-hidden w-full relative max-w-5xl mx-auto select-none"
+            >
                 <div className="absolute left-0 top-0 h-full w-20 z-10 pointer-events-none bg-gradient-to-r from-white to-transparent" />
                 <div className="marquee-inner flex will-change-transform min-w-[200%]" style={{ animationDuration: "15s" }}>
                     <div className="flex">
@@ -30,7 +38,7 @@ const MarqueeTrustedBrands = () => {
                     </div>
                 </div>
                 <div className="absolute right-0 top-0 h-full w-20 md:w-40 z-10 pointer-events-none bg-gradient-to-l from-white to-transparent" />
-            </div>
+            </motion.div>
         </>
     );
 };

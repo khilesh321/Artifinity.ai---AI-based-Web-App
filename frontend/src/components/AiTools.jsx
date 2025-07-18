@@ -1,6 +1,22 @@
 import { useNavigate } from "react-router-dom";
 import { AiToolsData } from "../assets"
 import { useUser } from "@clerk/clerk-react";
+import { motion } from "framer-motion";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0 },
+};
 
 function AiTools() {
   const navigate = useNavigate();
@@ -12,9 +28,19 @@ function AiTools() {
         <p className="text-gray-500 max-w-lg mx-auto">Everything you need to create, enhance, and optimize your content with cutting-edge AI technology.</p>
       </div>
 
-      <div className="flex flex-wrap mt-10 justify-center">
+      <motion.div
+        className="flex flex-wrap mt-10 justify-center"
+        variants={containerVariants}
+        initial="hidden"
+        animate="show"
+      >
         {AiToolsData.map((tool, index) =>(
-          <div key={index} className='p-8 m-4 max-w-xs rounded-lg bg-[#FDFDFE] shadow-lg border border-gray-100 hover:-translate-y-1 transition-all duration-300 cursor-pointer' onClick={() => user && navigate(tool.path)}>
+          <motion.div
+            key={index}
+            className='p-8 m-4 max-w-xs rounded-lg bg-[#FDFDFE] shadow-lg border border-gray-100 hover:-translate-y-1 transition-all duration-300 cursor-pointer'
+            onClick={() => user && navigate(tool.path)}
+            variants={itemVariants}
+          >
             <tool.Icon
               className="w-12 h-12 p-3 text-white rounded-xl bg-gradient-to-b"
               style={{
@@ -23,9 +49,9 @@ function AiTools() {
             />
             <h3 className="mt-6 mb-3 text-lg font-semibold">{tool.title}</h3>
             <p className="text-gray-400 text-sm max-w-[95%]">{tool.description}</p>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   )
 }
