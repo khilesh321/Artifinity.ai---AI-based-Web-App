@@ -4,3 +4,4 @@ build/
 .env
 *.log
 test.js
+.kilocode/rules/enhancements.md
