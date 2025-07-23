@@ -1,10 +1,11 @@
 import OpenAI from "openai";
 import { saveCreation } from "../db.js";
+import { clerkClient } from "@clerk/express";
 
-const AI = new OpenAI(
-    api_key=process.env.GEMINI_API_KEY,
-    base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
-)
+const AI = new OpenAI({
+  apiKey: process.env.GEMINI_API_KEY,
+  baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/"
+});
 
 export const generateArticle = async (req, res) => {
   try {
@@ -42,7 +43,19 @@ export const generateArticle = async (req, res) => {
       publish: false
     });
 
-  } catch (e) {
+    if (plan !== 'premium') {
+      // Deduct free usage if not a premium user
+      await clerkClient.users.updateUserMetadata(userId, {
+        privateMetadata: {
+          free_usage: freeUsage + 1
+        }
+      });
+    }
     
+    res.json({success: true, content});
+
+  } catch (e) {
+    console.log(e.message);
+    res.status(500).json({success: false, message: e.message || 'An error occurred while generating the article.'});
   }
 }

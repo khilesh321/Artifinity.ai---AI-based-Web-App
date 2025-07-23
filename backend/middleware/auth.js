@@ -13,7 +13,9 @@ export const auth = async (req, res, next) => {
       req.free_usage = user.privateMetadata.free_usage;
     } else {
       await clerkClient.users.updateUserMetadata(userId, {
-        free_usage: 0
+        privateMetadata: {
+          free_usage: 0
+        }
       });
       req.free_usage = 0;
     }
@@ -21,6 +23,6 @@ export const auth = async (req, res, next) => {
     req.plan = hasPremiumPlan ? 'premium' : 'free';
     next();
   } catch (e) {
-    res.status(401).json({success: false, message: error.message || 'Unauthorized'});
+    res.status(401).json({success: false, message: e.message || 'Unauthorized'});
   }
 }
