@@ -1,6 +1,12 @@
 import { Edit, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import axios from "axios";
+import { useAuth } from "@clerk/clerk-react";
+import toast from "react-hot-toast";
+import Markdown from "react-markdown";
+
+axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 
 function WriteArticle() {
   const articleLength = [
@@ -11,6 +17,36 @@ function WriteArticle() {
 
   const [selectedLength, setSelectedLength] = useState(articleLength[0]);
   const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [content, setContent] = useState("");
+
+  const {getToken} = useAuth();
+
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      const prompt = `Write an article about "${input}" with a length of ${selectedLength.value} words.`;
+      
+      const {data} = await axios.post('/api/ai/generate-article', {
+        prompt,
+        length: selectedLength.value
+      }, {
+        headers: {
+          Authorization: `Bearer ${await getToken()}`
+        }
+      });
+      if(data.success) {
+        setContent(data.content);
+      } else {
+        toast.error(data.message || "Failed to generate article");
+      }
+    } catch (e) {
+      toast.error(e.message || "An error occurred while generating the article.");
+    }
+    setLoading(false);
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
@@ -24,10 +60,7 @@ function WriteArticle() {
         initial={{ opacity: 0, x: -40 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ type: "spring", stiffness: 120, damping: 20, delay: 0.1 }}
-        onSubmit={(e) => {
-          e.preventDefault();
-          // Handle form submission
-        }}
+        onSubmit={onSubmitHandler}
         className="w-full max-w-lg p-4 bg-white rounded-lg border border-gray-200"
       >
         <div className="flex items-center gap-3">
@@ -72,9 +105,11 @@ function WriteArticle() {
           whileHover={{ scale: 1.01, boxShadow: "0 2px 8px rgba(34,107,255,0.10)" }}
           whileTap={{ scale: 0.97 }}
           transition={{ type: "spring", stiffness: 300, damping: 18 }}
+          disabled={loading || !input}
           className="w-full flex justify-center items-center gap-2 bg-gradient-to-r from-[#226BFF] to-[#65ADFF] text-white px-4 py-2 mt-6 text-sm rounded-lg cursor-pointer"
         >
-          <Edit className="w-5" />
+          {loading ? <span className="w-4 h-4 my-1 rounded-full border-2 border-t-transparent animate-spin"></span>
+          :<Edit className="w-5" />}
           Generate Article
         </motion.button>
       </motion.form>
@@ -90,12 +125,18 @@ function WriteArticle() {
           <h1 className="text-xl font-semibold">Generated Article</h1>
         </div>
 
-        <div className="flex flex-1 justify-center items-center">
+        {!content ? (<div className="flex flex-1 justify-center items-center">
           <div className="text-sm flex flex-col items-center gap-5 text-gray-400">
             <Edit className="w-9 h-9 text-gray-400" />
             <p>Enter a topic to generate an article</p>
           </div>
-        </div>
+        </div>) : (
+          <div data-lenis-prevent className="mt-3 h-full overflow-y-scroll text-sm text-slate-600">
+            <div className="reset-tw">
+              <Markdown>{content}</Markdown>
+            </div>
+          </div>
+        )}
       </motion.div>
     </motion.div>
   );

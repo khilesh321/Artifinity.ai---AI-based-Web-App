@@ -3,6 +3,8 @@ import { saveCreation } from "../db.js";
 import { clerkClient } from "@clerk/express";
 import axios from "axios";
 import {v2 as cloudinary} from "cloudinary";
+import fs from "fs";
+import pdf from 'pdf-parse/lib/pdf-parse.js';
 
 const AI = new OpenAI({
   apiKey: process.env.GEMINI_API_KEY,
@@ -162,5 +164,137 @@ export const generateImage = async (req, res) => {
   } catch (e) {
     console.error('Controller error:', e);
     res.status(500).json({success: false, message: e.message || 'An error occurred while generating the image.'});
+  }
+}
+
+export const removeImageBackground = async (req, res) => {
+  try {
+    const {userId} = req.auth();
+    const {image} = req.file;
+    const plan = req.plan;
+
+    // Check if user has enough free usage left
+    if (plan !== 'premium') {
+      return res.status(403).json({success: false, message: 'This feature is only available for premium users.'});
+    }
+
+    let secure_url;
+    try {
+      ({ secure_url } = await cloudinary.uploader.upload(image.path, {
+        transformation: [
+          { effect: "background_removal", background_removal: "remove_the_background" },
+        ]
+      }));
+    } catch (cloudErr) {
+      console.error('Cloudinary upload error:', cloudErr);
+      return res.status(400).json({ success: false, message: 'Invalid image file' });
+    }
+
+    await saveCreation({
+      userId,
+      prompt: "Remove background from image",
+      content: secure_url,
+      type: 'image',
+      publish: false
+    });
+
+    res.json({success: true, content: secure_url});
+
+  } catch (e) {
+    console.error('Controller error:', e);
+    res.status(500).json({success: false, message: e.message || 'An error occurred while removing the image background.'});
+  }
+}
+
+export const removeImageObject = async (req, res) => {
+  try {
+    const {userId} = req.auth();
+    const {object} = req.body;
+    const {image} = req.file;
+    const plan = req.plan;
+
+    // Check if user has enough free usage left
+    if (plan !== 'premium') {
+      return res.status(403).json({success: false, message: 'This feature is only available for premium users.'});
+    }
+
+    let public_id;
+    try {
+      ({ public_id } = await cloudinary.uploader.upload(image.path));
+    } catch (cloudErr) {
+      console.error('Cloudinary upload error:', cloudErr);
+      return res.status(400).json({ success: false, message: 'Invalid image file' });
+    }
+
+    const imageUrl = cloudinary.url(public_id, {
+      transformation: [{effect: `gen_remove:${object}`}],
+      resource_type: 'image'
+    });
+
+
+    await saveCreation({
+      userId,
+      prompt: `Remove ${object} from image`,
+      content: imageUrl,
+      type: 'image',
+      publish: false
+    });
+
+    res.json({success: true, content: imageUrl});
+
+  } catch (e) {
+    console.error('Controller error:', e);
+    res.status(500).json({success: false, message: e.message || 'An error occurred while removing the object.'});
+  }
+}
+
+export const resumeReview = async (req, res) => {
+  try {
+    const {userId} = req.auth();
+    const {resume} = req.file;
+    const plan = req.plan;
+
+    // Check if user has enough free usage left
+    if (plan !== 'premium') {
+      return res.status(403).json({success: false, message: 'This feature is only available for premium users.'});
+    }
+
+    if(resume.size > 5 * 1024 * 1024){
+      return res.status(400).json({success: false, message: 'Resume file size exceeds 5MB limit.'});
+    }
+
+    const dataBuffer = fs.readFileSync(resume.path);
+    const pdfData = await pdf(dataBuffer);
+
+    const prompt = `Review the following resume and provide constructive feedback on its strengths, weaknesses, and areas for improvement. Provide a summary of the key points and suggestions for enhancement.\n\nResume Content:\n${pdfData.text}`;
+
+    const response = await AI.chat.completions.create({
+      model: "gemini-2.0-flash",
+      messages: [
+        {
+          role: "user",
+          content: prompt
+        }
+      ],
+      temperature: 0.7,
+      max_tokens: 1000
+    });
+
+    const content = response.choices[0].message.content;
+
+
+    await saveCreation({
+      userId,
+      prompt: `Review the uploaded resume`,
+      content,
+      type: 'image',
+      publish: false
+    });
+
+    res.json({success: true, content: content});
+
+  } catch (e) {
+    console.error('Controller error:', e);
+    res.status(500).json({success: false, message: e.message || 'An error occurred while reviewing the resume.'});
   }
 }
