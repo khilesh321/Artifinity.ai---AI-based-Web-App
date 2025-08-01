@@ -55,7 +55,7 @@ export const generateArticle = async (req, res) => {
     res.json({success: true, content});
 
   } catch (e) {
-    console.log(e.message);
+    console.error('Controller error:', e);
     res.status(500).json({success: false, message: e.message || 'An error occurred while generating the article.'});
   }
 }

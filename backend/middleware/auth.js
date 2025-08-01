@@ -4,10 +4,10 @@ import { clerkClient } from "@clerk/express";
 
 export const auth = async (req, res, next) => {
   try {
-    const {userId, has} = await req.auth();
+    const {userId, has} = req.auth();
     const hasPremiumPlan = await has({plan: 'premium'});
     
-    const user = await clerkClient.users.getUser(userId); 
+    const user = await clerkClient.users.getUser(userId);
 
     if(!hasPremiumPlan && user.privateMetadata.free_usage){
       req.free_usage = user.privateMetadata.free_usage;
@@ -23,6 +23,7 @@ export const auth = async (req, res, next) => {
     req.plan = hasPremiumPlan ? 'premium' : 'free';
     next();
   } catch (e) {
+    console.error('Auth middleware error:', e);
     res.status(401).json({success: false, message: e.message || 'Unauthorized'});
   }
 }

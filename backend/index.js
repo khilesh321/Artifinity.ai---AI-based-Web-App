@@ -1,14 +1,14 @@
-import e from "express";
+import express from "express";
 import cors from "cors";
 import 'dotenv/config';
 import connectDB from "./db.js";
 import {clerkMiddleware, requireAuth} from "@clerk/express";
 import aiRouter from "./routes/aiRoutes.js";
 
-const app = e();
+const app = express();
 
 app.use(cors());
-app.use(e.json());
+app.use(express.json());
 app.use(clerkMiddleware());
 connectDB();
 
