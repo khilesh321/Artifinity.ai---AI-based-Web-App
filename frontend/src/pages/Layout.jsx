@@ -10,7 +10,7 @@ function Layout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const {user} = useUser();
   return user ? (
-    <div className="flex flex-col items-start justify-start h-screen">
+    <div className="flex flex-col items-start justify-start min-h-screen bg-[#F4F7FB]">
       <nav className="w-full px-8 min-h-14 flex items-center justify-between border-b border-gray-200 fixed top-0 z-50 bg-white">
         <div id='logo' className='flex items-center cursor-pointer' onClick={() => navigate('/')}>
           <img src={assets.logo} className='w-8 sm:w-9' alt="logo" />
