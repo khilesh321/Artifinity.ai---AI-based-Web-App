@@ -3,20 +3,40 @@ import { SidebarNavItems } from "../assets";
 import { NavLink } from "react-router-dom";
 import { LogOut } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
- 
+import { useMediaQuery } from "react-responsive";
+
 function Sidebar({ sidebarOpen, setSidebarOpen }) {
   const {user} = useUser();
   const {signOut, openUserProfile} = useClerk();
+  const isDesktopOrTablet = useMediaQuery({ minWidth: 768 });
+  const isMobile = useMediaQuery({ maxWidth: 767 });
+
+  // Sidebar always visible on md+ screens, toggle on mobile
   return (
     <AnimatePresence>
-      {true && (
+      {(sidebarOpen || isDesktopOrTablet) && (
         <motion.div
-          initial={{ x: "-100%" }}
+          initial={{ x: isMobile ? "-100%" : 0 }}
           animate={{ x: 0 }}
-          exit={{ x: "-100%" }}
+          exit={{ x: isMobile ? "-100%" : 0 }}
           transition={{ type: "spring", stiffness: 400, damping: 40 }}
-          className="w-60 bg-white border-r border-gray-200 flex flex-col justify-between items-center max-sm:absolute top-14 bottom-0 z-40 shadow-lg"
+          className={`w-60 bg-white border-r border-gray-200 flex flex-col justify-between items-center
+            ${isMobile ? "fixed top-14 bottom-0 z-40 shadow-lg" : ""}
+            ${isDesktopOrTablet ? "relative shadow-none" : ""}`}
         >
+          {isMobile && (
+            <button
+              className="absolute right-4 top-4 z-50"
+              onClick={() => setSidebarOpen(false)}
+              aria-label="Close sidebar"
+            >
+              <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2"
+                strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-x">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+          )}
           <div className="my-7 w-full">
             <img onClick={openUserProfile} src={user.imageUrl} alt="user-profile" className="w-13 h-13 rounded-full mx-auto cursor-pointer"/>
             <h1 className="text-center mt-1">{user.fullName}</h1>
