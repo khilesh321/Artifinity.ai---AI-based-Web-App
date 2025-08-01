@@ -22,7 +22,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
           transition={{ type: "spring", stiffness: 400, damping: 40 }}
           className={`w-60 bg-white border-r border-gray-200 flex flex-col justify-between items-center
             ${isMobile ? "fixed top-14 bottom-0 z-40 shadow-lg" : ""}
-            ${isDesktopOrTablet ? "relative shadow-none" : ""}`}
+            ${isDesktopOrTablet ? "fixed top-14 left-0 h-[calc(100vh-56px)] z-30 shadow-none" : ""}`}
         >
           {isMobile && (
             <button

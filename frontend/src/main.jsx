@@ -16,9 +16,9 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl='/'>
       <BrowserRouter>
-        <ReactLenis root options={{ lerp: 0.1 }}>
+        {/* <ReactLenis root options={{ lerp: 0.1 }}> */}
           <App />
-        </ReactLenis>
+        {/* </ReactLenis> */}
       </BrowserRouter>
     </ClerkProvider>
   </StrictMode>,
