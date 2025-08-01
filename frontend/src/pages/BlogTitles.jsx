@@ -44,7 +44,7 @@ function BlogTitles() {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 40 }}
         transition={{ type: "spring", stiffness: 80, damping: 18 }}
-        className="h-full overscroll-y p-6 flex items-start flex-wrap gap-4 text-slate-70"
+        className="h-full mt-20 overscroll-y p-6 flex items-start flex-wrap gap-4 text-slate-70"
       >
         {/* left column */}
         <motion.form

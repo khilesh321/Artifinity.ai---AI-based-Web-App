@@ -82,7 +82,7 @@ function Community() {
         animate="show"
         exit="exit"
         variants={containerVariants}
-        className="flex flex-1 flex-col gap-4 p-6 h-full"
+        className="flex mt-15 flex-1 flex-col gap-4 p-6 h-full"
       >
         <h1 className="text-xl font-semibold">Creations</h1>
         <motion.div

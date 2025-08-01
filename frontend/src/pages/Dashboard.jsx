@@ -41,7 +41,7 @@ function Dashboard() {
     <AnimatePresence mode="wait">
       <motion.div
         data-lenis-prevent
-        className="h-full overscroll-y p-6"
+        className="h-full mt-15 overscroll-y p-6"
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 40 }}

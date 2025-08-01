@@ -46,7 +46,7 @@ export default function Footer() {
           </div>
         </div>
         <p className="pt-4 text-center text-xs md:text-sm pb-5">
-          Copyright {new Date().getFullYear()} © Artifinity.ai. All Rights Reserved.
+          Copyright {new Date().getFullYear()} © Khilesh Jawale. All Rights Reserved.
         </p>
       </motion.footer>
     );

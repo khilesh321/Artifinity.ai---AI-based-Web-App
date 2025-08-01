@@ -11,7 +11,7 @@ function Layout() {
   const {user} = useUser();
   return user ? (
     <div className="flex flex-col items-start justify-start h-screen">
-      <nav className="w-full px-8 min-h-14 flex items-center justify-between border-b border-gray-200 sticky top-0 z-50 bg-white">
+      <nav className="w-full px-8 min-h-14 flex items-center justify-between border-b border-gray-200 fixed top-0 z-50 bg-white">
         <div id='logo' className='flex items-center cursor-pointer' onClick={() => navigate('/')}>
           <img src={assets.logo} className='w-8 sm:w-9' alt="logo" />
           <span className='inline-block ml-1 text-xl md:text-2xl font-semibold text-primary'>Artifinity.ai</span>
