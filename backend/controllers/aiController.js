@@ -170,7 +170,7 @@ export const generateImage = async (req, res) => {
 export const removeImageBackground = async (req, res) => {
   try {
     const {userId} = req.auth();
-    const {image} = req.file;
+    const image = req.file;
     const plan = req.plan;
 
     // Check if user has enough free usage left
@@ -210,7 +210,7 @@ export const removeImageObject = async (req, res) => {
   try {
     const {userId} = req.auth();
     const {object} = req.body;
-    const {image} = req.file;
+    const image = req.file;
     const plan = req.plan;
 
     // Check if user has enough free usage left
@@ -251,7 +251,7 @@ export const removeImageObject = async (req, res) => {
 export const resumeReview = async (req, res) => {
   try {
     const {userId} = req.auth();
-    const {resume} = req.file;
+    const resume = req.file;
     const plan = req.plan;
 
     // Check if user has enough free usage left

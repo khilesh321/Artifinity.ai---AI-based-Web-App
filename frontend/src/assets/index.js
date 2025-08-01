@@ -111,8 +111,8 @@ export const dummyCreationData = [
         "type": "blog-title",
         "publish": false,
         "likes": [],
-        "created_at": "2025-07-01T11:09:50.492Z",
-        "updated_at": "2025-07-01T11:09:50.492Z"
+        "createdAt": "2025-07-01T11:09:50.492Z",
+        "updatedAt": "2025-07-01T11:09:50.492Z"
     },
     {
         "id": 8,
@@ -122,8 +122,8 @@ export const dummyCreationData = [
         "type": "blog-title",
         "publish": false,
         "likes": [],
-        "created_at": "2025-07-01T11:08:10.450Z",
-        "updated_at": "2025-07-01T11:08:10.450Z"
+        "createdAt": "2025-07-01T11:08:10.450Z",
+        "updatedAt": "2025-07-01T11:08:10.450Z"
     },
     {
         "id": 7,
@@ -133,8 +133,8 @@ export const dummyCreationData = [
         "type": "article",
         "publish": false,
         "likes": [],
-        "created_at": "2025-07-01T11:07:51.312Z",
-        "updated_at": "2025-07-01T11:07:51.312Z"
+        "createdAt": "2025-07-01T11:07:51.312Z",
+        "updatedAt": "2025-07-01T11:07:51.312Z"
     }
 ]
 
@@ -151,8 +151,8 @@ export const dummyPublishedCreationData = [
             "user_2yMX02PRbyMtQK6PebpjnxvRNIA",
             "user_2yaW5EHzeDfQbXdAJWYFnZo2bje"
         ],
-        "created_at": "2025-06-19T09:02:25.035Z",
-        "updated_at": "2025-06-19T09:58:37.552Z",
+        "createdAt": "2025-06-19T09:02:25.035Z",
+        "updatedAt": "2025-06-19T09:58:37.552Z",
     },
     {
         "id": 2,
@@ -165,8 +165,8 @@ export const dummyPublishedCreationData = [
             "user_2yMX02PRbyMtQK6PebpjnxvRNIA",
             "user_2yaW5EHzeDfQbXdAJWYFnZo2bje"
         ],
-        "created_at": "2025-06-19T08:16:54.614Z",
-        "updated_at": "2025-06-19T09:58:40.072Z",
+        "createdAt": "2025-06-19T08:16:54.614Z",
+        "updatedAt": "2025-06-19T09:58:40.072Z",
     },
     {
         "id": 3,
@@ -178,8 +178,8 @@ export const dummyPublishedCreationData = [
         "likes": [
             "user_2yaW5EHzeDfQbXdAJWYFnZo2bje"
         ],
-        "created_at": "2025-06-23T11:29:23.351Z",
-        "updated_at": "2025-06-23T11:29:44.434Z",
+        "createdAt": "2025-06-23T11:29:23.351Z",
+        "updatedAt": "2025-06-23T11:29:44.434Z",
         "__v": 1
     },
 ]
