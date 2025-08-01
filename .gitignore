@@ -4,5 +4,4 @@ build/
 .env
 *.log
 test.js
-.kilocode/rules/enhancements.md
-.github/copilot-instructions.md
+.github/
