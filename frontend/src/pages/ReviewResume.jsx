@@ -41,7 +41,7 @@ function ReviewResume() {
         toast.error(data.message || "Failed to review resume");
       }
     } catch (err) {
-      toast.error("Resume review failed");
+      toast.error(err.response?.data?.message || err.message || "Resume review failed");
     } finally {
       setLoading(false);
     }

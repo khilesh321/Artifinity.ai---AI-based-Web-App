@@ -47,7 +47,7 @@ function RemoveObject() {
         toast.error(data.message || "Failed to remove object");
       }
     } catch (err) {
-      toast.error("Object removal failed");
+      toast.error(err.response?.data?.message || err.message || "Object removal failed");
     } finally {
       setLoading(false);
     }

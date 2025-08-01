@@ -124,6 +124,7 @@ export const generateImage = async (req, res) => {
 
     // Check if user has enough free usage left
     if (plan !== 'premium') {
+      console.log("SENDING 403: This feature is only available for premium users.");
       return res.status(403).json({success: false, message: 'This feature is only available for premium users.'});
     }
 
@@ -175,6 +176,7 @@ export const removeImageBackground = async (req, res) => {
 
     // Check if user has enough free usage left
     if (plan !== 'premium') {
+      console.log("SENDING 403: This feature is only available for premium users.");
       return res.status(403).json({success: false, message: 'This feature is only available for premium users.'});
     }
 
@@ -215,6 +217,7 @@ export const removeImageObject = async (req, res) => {
 
     // Check if user has enough free usage left
     if (plan !== 'premium') {
+      console.log("SENDING 403: This feature is only available for premium users.");
       return res.status(403).json({success: false, message: 'This feature is only available for premium users.'});
     }
 
@@ -256,6 +259,7 @@ export const resumeReview = async (req, res) => {
 
     // Check if user has enough free usage left
     if (plan !== 'premium') {
+      console.log("SENDING 403: This feature is only available for premium users.");
       return res.status(403).json({success: false, message: 'This feature is only available for premium users.'});
     }
 

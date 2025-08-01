@@ -41,7 +41,7 @@ function RemoveBackground() {
         toast.error(data.message || "Failed to remove background");
       }
     } catch (err) {
-      toast.error("Background removal failed");
+      toast.error(err.response?.data?.message || err.message || "Background removal failed");
     } finally {
       setLoading(false);
     }

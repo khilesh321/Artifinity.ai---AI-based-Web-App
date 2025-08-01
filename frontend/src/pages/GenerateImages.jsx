@@ -52,7 +52,11 @@ function GenerateImages() {
         toast.error(data.message || "Failed to generate image");
       }
     } catch (err) {
-      toast.error(err.message || "Image generation failed");
+      toast.error(
+        err.response?.data?.message ||
+        err.message ||
+        "Image generation failed"
+      );
     } finally {
       setLoading(false);
     }
