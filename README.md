@@ -1,23 +1,24 @@
-
-
 # Artifinity.ai - AI Based Web App
 
 
+### 🏠 Home Page
 ![Home Page](./frontend/src/assets/screenshots/HomePage.png)
-*Home Page*
 
+
+### 📊 Dashboard
 ![Dashboard](./frontend/src/assets/screenshots/DashboardPage.png)
-*Dashboard*
 
 
+### 🎨 Generate Image Page
 ![Generate Image](./frontend/src/assets/screenshots/GenerateImagePage.png)
-*Generate Image Page*
 
+
+### 📄 Review Resume Page
 ![Review Resume](./frontend/src/assets/screenshots/ReviewResumePage.png)
-*Review Resume Page*
 
+
+### 👥 Community Page
 ![Community](./frontend/src/assets/screenshots/CommunityPage.png)
-*Community Page*
 
 Artifinity.ai is a full-stack web application that leverages advanced AI models to generate articles, blog titles, images, and more. It features user authentication, premium/free plan management, and a modern React frontend.
 
