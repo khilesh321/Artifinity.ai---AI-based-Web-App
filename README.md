@@ -46,7 +46,7 @@ Artifinity.ai is a full-stack web application that leverages advanced AI models 
 - Node.js (v18+ recommended)
 - MongoDB Atlas account (or local MongoDB)
 - Clerk account (for authentication)
-- Groq API key (for LLM)
+- Google Gemini API key (for LLM)
 - Cloudinary account (for image hosting)
 
 ### Installation
@@ -68,7 +68,7 @@ Artifinity.ai is a full-stack web application that leverages advanced AI models 
 3. **Set up environment variables:**
 
 	- Copy `.env.example` to `.env` in both `backend/` and `frontend/`.
-	- Fill in your MongoDB, Clerk, Groq, and Cloudinary credentials.
+	- Fill in your MongoDB, Clerk, Gemini, and Cloudinary credentials.
 
 4. **Start the backend server:**
 
