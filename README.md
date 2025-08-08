@@ -1,5 +1,7 @@
 # Artifinity.ai - AI Based Web App
 
+[🌐 Live Demo](https://artifinity-ai.vercel.app)
+
 
 ### 🏠 Home Page
 ![Home Page](./frontend/src/assets/screenshots/HomePage.png)
