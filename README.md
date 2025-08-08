@@ -37,7 +37,7 @@ Artifinity.ai is a full-stack web application that leverages advanced AI models 
 
 - **Frontend**: React, Vite, Clerk, Tailwind CSS
 - **Backend**: Node.js, Express, MongoDB (Mongoose), Clerk, Multer, Cloudinary
-- **AI Providers**: Groq (LLM), Google Gemini (optional), ClipDrop (image), Cloudinary (image hosting)
+- **AI Providers**: Google Gemini (LLM), ClipDrop (image), Cloudinary (image hosting)
 
 ## Getting Started
 
