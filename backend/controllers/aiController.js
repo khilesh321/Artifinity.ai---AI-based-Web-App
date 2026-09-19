@@ -6,6 +6,8 @@ import {v2 as cloudinary} from "cloudinary";
 import fs from "fs";
 import pdf from 'pdf-parse/lib/pdf-parse.js';
 
+const GEMINI_MODEL = "gemini-3.5-flash";
+
 const AI = new OpenAI({
   apiKey: process.env.GEMINI_API_KEY,
   baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/"
@@ -25,7 +27,7 @@ export const generateArticle = async (req, res) => {
 
     // Generate article logic here
     const response = await AI.chat.completions.create({
-      model: "gemini-2.0-flash",
+      model: GEMINI_MODEL,
       messages: [
         {
           role: "user",
@@ -78,7 +80,7 @@ export const generateBlogTitle = async (req, res) => {
 
     // Generate title logic here
     const response = await AI.chat.completions.create({
-      model: "gemini-2.0-flash",
+      model: GEMINI_MODEL,
       messages: [
         {
           role: "user",
@@ -273,7 +275,7 @@ export const resumeReview = async (req, res) => {
     const prompt = `Review the following resume and provide constructive feedback on its strengths, weaknesses, and areas for improvement. Provide a summary of the key points and suggestions for enhancement.\n\nResume Content:\n${pdfData.text}`;
 
     const response = await AI.chat.completions.create({
-      model: "gemini-2.0-flash",
+      model: GEMINI_MODEL,
       messages: [
         {
           role: "user",
