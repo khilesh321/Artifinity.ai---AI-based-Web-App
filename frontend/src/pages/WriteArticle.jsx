@@ -6,7 +6,7 @@ import { useAuth } from "@clerk/clerk-react";
 import toast from "react-hot-toast";
 import Markdown from "react-markdown";
 
-axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
+axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL;
 
 function WriteArticle() {
   const articleLength = [
@@ -26,7 +26,7 @@ function WriteArticle() {
     e.preventDefault();
     try {
       setLoading(true);
-      const prompt = `Write an article about "${input}" with a length of ${selectedLength.value} words.`;
+      const prompt = `Write a complete, well-structured article about "${input}". Aim for at least ${selectedLength.value} words, with detailed sections and no summary-style cutoff.`;
       
       const {data} = await axios.post('/api/ai/generate-article', {
         prompt,

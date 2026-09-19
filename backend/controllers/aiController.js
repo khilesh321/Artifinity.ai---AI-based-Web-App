@@ -19,6 +19,8 @@ export const generateArticle = async (req, res) => {
     const {prompt, length} = req.body;
     const plan = req.plan;
     const freeUsage = req.free_usage || 0;
+    const requestedLength = Number(length) || 500;
+    const articlePrompt = `${prompt} IMPORTANT: Write a complete, polished article that is at least ${requestedLength} words long. Do not stop early or summarize. Make it detailed, coherent, and naturally reach the target length.`;
 
     // Check if user has enough free usage left
     if (plan !== 'premium' && freeUsage >= 10) {
@@ -31,11 +33,10 @@ export const generateArticle = async (req, res) => {
       messages: [
         {
           role: "user",
-          content: prompt
+          content: articlePrompt
         }
       ],
-      temperature: 0.7,
-      max_tokens: length || 500
+      temperature: 0.7
     });
 
     const content = response.choices[0].message.content;
